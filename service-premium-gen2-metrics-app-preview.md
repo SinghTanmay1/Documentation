@@ -7,7 +7,7 @@ ms.reviewer: ''
 ms.service: powerbi
 ms.subservice: powerbi-premium
 ms.topic: how-to
-ms.date: 06/14/2022
+ms.date: 09/04/2022
 LocalizationGroup: Premium 
 ---
 
@@ -22,7 +22,7 @@ The app is updated often with new features and functionalities and provides the 
 
 To [install the Gen2 metrics app](service-premium-install-gen2-app.md), you must be a capacity admin. Once installed, anyone in the organization with the right permissions can view the app.
 
-The Gen2 metrics app has seven pages:
+The Gen2 metrics app has six pages:
 
 * [Overview](#overview)
 
@@ -30,11 +30,7 @@ The Gen2 metrics app has seven pages:
 
 * [Refresh](#refresh)
 
-* [Overview Preview](#overview-preview)
-
 * [Timepoint](#timepoint)
-
-* [Timepoint Preview](#timepoint-preview)
 
 * [Artifact Detail](#artifact-detail)
 
@@ -143,7 +139,11 @@ Displays the memory footprint recorded for Power BI items over time. If no item 
 
 #### Performance profile
 
-Displays the percentage of fast, moderate, and slow operations from the total number of operations performed on a Power BI item, over the past two weeks. If no item is filtered, this chart shows the performance profile for datasets on the entire capacity.
+Displays an aggregate of report performance across three operation categories:
+
+[!INCLUDE [gen2-app-fast-moderate-slow-operations](../includes/gen2-app-fast-moderate-slow-operations.md)]
+
+The aggregate is taken from the total number of operations performed on a Power BI item, over the past two weeks. If no item is filtered, this chart shows the performance profile for datasets on the entire capacity.
 
 ### Weekly trendlines
 
@@ -281,62 +281,6 @@ On the right side of the refresh page, there are two visuals designed to help yo
 
 * **Score card** - Displays the total number of performed operations.
 
-## Overview Preview
-
-Overview Preview page shows capacity performance including Preview workloads. Power BI does not bill for Preview workloads and their usage does not count towards capacity limits. This page can be used to determine the impact of Preview workload on capacity performance when they become generally available.
-
-:::image type="content" source="media/service-premium-gen2-metrics-app/overview(preview).png" alt-text="A screenshot showing the multi metric column chart, in the overview page, in the Power BI Gen2 metrics app.":::
-
-The Multi metric column chart displays the four values listed below. It shows the top results for these values per Power BI item during the past two weeks. It includes data for both Preview and Public workloads.
-
-:::image type="content" source="media/service-premium-gen2-metrics-app/multi-metric-column-chart-values (preview).png" alt-text="A screenshot showing the multi metric column chart with the values row highlighted.":::
-
-* **CPU** - CPU processing time in seconds.
-
-* **Duration** - Processing time in seconds.
-
-* **Operations** - The number of Power BI operations that took place.
-
-* **Users** - The number of users that performed operations.
-
-#### CPU over time
-
-Displays the CPU usage of the selected capacity over time. Filters applied to the page in the [Multi metric column chart](#multi-metric-column-chart), affect this chart's display as follows:
-
-* *No filters applied* - Columns display the peak timepoint per hour.
-
-* *Filters are applied* -  The visuals displays every 30 second timepoint.
-
-To access the **Timepoint Preview** page from this visual, select the timepoint value and click on the **Explore button**
-
-:::image type="content" source="media/service-premium-gen2-metrics-app/timepoint-preview-drillthrough.png" alt-text="A screenshot showing the timepoint drill through option in the C P U overtime chart.":::
-
-The CPU over time chart displays the following elements:
-
-* **Interactive CPU** - Red columns represent the number of CPU seconds used during interactive operations in a 30 second period.
-
-    [*Interactive*](service-premium-interactive-background-operations.md#interactive-operations) operations cover a wide range of resources triggered by Power BI users. These operations are associated with interactive page loads and are handled by backend cores.
-
-* **Background** - Blue columns represent the number of CPU seconds used during background operations in a 30 second period.
-
-    [*Background*](service-premium-interactive-background-operations.md#background-operations) operations cover Power BI backend processes that are not directly triggered by users, such as data refreshes. These operations are handled by backend cores.
-
-* **Interactive Preview** - Green columns represent the number of CPU seconds used during interactive operations in a 30 second period for preview data.
-
-  
-
-* **Background Preview** - Sky Blue columns represent the number of CPU seconds used during background operations in a 30 second period for preview data.
-
-
-* **CPU Limit** - A Orange dotted line that shows the threshold of the allowed number of CPU seconds for the selected capacity. Columns that stretch above this line, represent timepoints where the capacity is overloaded.
-
-### Artifacts
-
-There is a slicer at top of the matrix chart. It gives an option to slice according to workload type and contains both preview and public workload kinds.
-There is also an additional column in matrix called **Preview Status** which shows if particular artifact is related to preview workload or not.
-
-:::image type="content" source="media/service-premium-gen2-metrics-app/artifacts(preview).png" alt-text="A screenshot showing the artifacts section, in the overview page, in the Power BI Gen2 metrics app.":::
-
 ## Timepoint
 
 All the activities in the capacity are ranked according to their compute impact. The timepoint page shows the top 100,000 impactful activities in the capacity. Use this page to understand which [*interactive* and *background*](service-premium-interactive-background-operations.md) operations contributed the most to CPU usage.
@@ -422,12 +366,6 @@ A table showing every background operation that contributed CPU usage to the tim
 
 All the columns in the background operations table are similar to the ones in the [interactive operations](#interactive-operations) table. However, the background operations table doesn't have a *users* column.
 
-## Timepoint Preview
-
-This page is similar to Timepoint Detail Page. This page contains both Public and Preview workload data for Interactive Operations and Background Operations. **Preview Status** can be used to distinguish between Preview and Public operations.
-:::image type="content" source="media/service-premium-gen2-metrics-app/timepoint-preview.png" alt-text="A screenshot showing the timepoint page in the Power BI Gen2 metrics app.":::
-
-
 ## Artifact Detail
 
 This page provides useful information about a specific Power BI item.
@@ -460,11 +398,7 @@ Displays the percentage of fast, moderate, and slow operations from the total nu
 
 :::image type="content" source="media/service-premium-gen2-metrics-app/artifact-performance.png" alt-text="A screenshot showing the performance visual in the artifact page, in the Power BI Gen2 metrics app.":::
 
-* **Fast** - The moving average of fast operations as a percentage of all the operations over time. A fast operation takes less than 100 milliseconds.
-
-* **Moderate** - The moving average of moderate operations as a percentage of all the operations over time. A moderate operation takes between 100 milliseconds to two seconds.
-
-* **Slow** - The moving average of slow operations as a percentage of all the operations over time. A slow operation takes over two seconds.
+[!INCLUDE [gen2-app-fast-moderate-slow-operations](../includes/gen2-app-fast-moderate-slow-operations.md)]
 
 ### Artifact size
 
